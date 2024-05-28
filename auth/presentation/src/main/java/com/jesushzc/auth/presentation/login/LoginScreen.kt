@@ -132,7 +132,7 @@ private fun LoginScreenScreen(
                 text = stringResource(id = R.string.login),
                 isLoading = state.isLoggingIn,
                 onClick = { onAction(LoginAction.OnLoginClick) },
-                enabled = state.canLogin,
+                enabled = state.canLogin and state.isLoggingIn.not(),
             )
             val annotatedString = buildAnnotatedString {
                 withStyle(
