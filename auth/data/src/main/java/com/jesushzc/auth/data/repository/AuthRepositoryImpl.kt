@@ -11,6 +11,8 @@ import com.jesushzc.core.domain.util.DataError
 import com.jesushzc.core.domain.util.EmptyDataResult
 import com.jesushzc.core.domain.util.Result
 import com.jesushzc.core.domain.util.asEmptyDataResult
+import com.jesushzc.core.util.Constants.ENDPOINT_LOGIN
+import com.jesushzc.core.util.Constants.ENDPOINT_REGISTER
 import io.ktor.client.HttpClient
 
 class AuthRepositoryImpl(
@@ -23,7 +25,7 @@ class AuthRepositoryImpl(
         password: String
     ): EmptyDataResult<DataError.Network> {
         return httpClient.post<RegisterRequest, Unit>(
-            route = "/register",
+            route = ENDPOINT_REGISTER,
             body = RegisterRequest(
                 email = email,
                 password = password
@@ -36,7 +38,7 @@ class AuthRepositoryImpl(
         password: String
     ): EmptyDataResult<DataError.Network> {
         val result = httpClient.post<LoginRequest, LoginResponse>(
-            route = "/login",
+            route = ENDPOINT_LOGIN,
             body = LoginRequest(
                 email = email,
                 password = password

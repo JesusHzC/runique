@@ -10,6 +10,12 @@ import androidx.navigation.compose.navigation
 import com.jesushzc.auth.presentation.intro.IntroScreenRoot
 import com.jesushzc.auth.presentation.login.LoginScreenScreenRoot
 import com.jesushzc.auth.presentation.register.RegisterScreenRoot
+import com.jesushzc.core.util.Constants.GRAPH_AUTH
+import com.jesushzc.core.util.Constants.GRAPH_RUN
+import com.jesushzc.core.util.Constants.SCREEN_INTRO
+import com.jesushzc.core.util.Constants.SCREEN_LOGIN
+import com.jesushzc.core.util.Constants.SCREEN_REGISTER
+import com.jesushzc.core.util.Constants.SCREEN_RUN_OVERVIEW
 
 @Composable
 fun NavigationRoot(
@@ -17,7 +23,7 @@ fun NavigationRoot(
 ) {
     NavHost(
         navController = navController,
-        startDestination = "auth"
+        startDestination = GRAPH_AUTH
     ) {
         authGraph(navController)
         runGraph(navController)
@@ -26,25 +32,25 @@ fun NavigationRoot(
 
 private fun NavGraphBuilder.authGraph(navController: NavHostController) {
     navigation(
-        startDestination = "intro",
-        route = "auth"
+        startDestination = SCREEN_INTRO,
+        route = GRAPH_AUTH
     ) {
-        composable(route = "intro") {
+        composable(route = SCREEN_INTRO) {
             IntroScreenRoot(
                 onSignInClick = {
-                    navController.navigate("login")
+                    navController.navigate(SCREEN_LOGIN)
                 },
                 onSignUpClick = {
-                    navController.navigate("register")
+                    navController.navigate(SCREEN_REGISTER)
                 }
             )
         }
 
-        composable(route = "register") {
+        composable(route = SCREEN_REGISTER) {
             RegisterScreenRoot(
                 onSignInClick = {
-                    navController.navigate("login") {
-                        popUpTo("register") {
+                    navController.navigate(SCREEN_LOGIN) {
+                        popUpTo(SCREEN_REGISTER) {
                             inclusive = true
                             saveState = true
                         }
@@ -52,23 +58,23 @@ private fun NavGraphBuilder.authGraph(navController: NavHostController) {
                     }
                 },
                 onSuccessfulRegistration = {
-                    navController.navigate("login")
+                    navController.navigate(SCREEN_LOGIN)
                 }
             )
         }
         
-        composable(route = "login") {
+        composable(route = SCREEN_LOGIN) {
             LoginScreenScreenRoot(
                 onLoginSuccess = {
-                    navController.navigate("run") {
-                        popUpTo("auth") {
+                    navController.navigate(GRAPH_RUN) {
+                        popUpTo(GRAPH_AUTH) {
                             inclusive = true
                         }
                     }
                 },
                 onSignUpClick = {
-                    navController.navigate("register") {
-                        popUpTo("login") {
+                    navController.navigate(SCREEN_REGISTER) {
+                        popUpTo(SCREEN_LOGIN) {
                             inclusive = true
                             saveState = true
                         }
@@ -82,10 +88,10 @@ private fun NavGraphBuilder.authGraph(navController: NavHostController) {
 
 private fun NavGraphBuilder.runGraph(navController: NavHostController) {
     navigation(
-        startDestination = "run_overview",
-        route = "run"
+        startDestination = SCREEN_RUN_OVERVIEW,
+        route = GRAPH_RUN
     ) {
-        composable("run_overview") {
+        composable(SCREEN_RUN_OVERVIEW) {
             Text("Run Overview")
         }
     }
