@@ -19,11 +19,12 @@ import com.jesushzc.core.util.Constants.SCREEN_RUN_OVERVIEW
 
 @Composable
 fun NavigationRoot(
-    navController: NavHostController
+    navController: NavHostController,
+    isLoggedIn: Boolean
 ) {
     NavHost(
         navController = navController,
-        startDestination = GRAPH_AUTH
+        startDestination = if (isLoggedIn) GRAPH_RUN else GRAPH_AUTH
     ) {
         authGraph(navController)
         runGraph(navController)
