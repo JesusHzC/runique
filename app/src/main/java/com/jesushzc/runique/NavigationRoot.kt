@@ -12,10 +12,12 @@ import com.jesushzc.auth.presentation.login.LoginScreenScreenRoot
 import com.jesushzc.auth.presentation.register.RegisterScreenRoot
 import com.jesushzc.core.util.Constants.GRAPH_AUTH
 import com.jesushzc.core.util.Constants.GRAPH_RUN
+import com.jesushzc.core.util.Constants.SCREEN_ACTIVE_RUN
 import com.jesushzc.core.util.Constants.SCREEN_INTRO
 import com.jesushzc.core.util.Constants.SCREEN_LOGIN
 import com.jesushzc.core.util.Constants.SCREEN_REGISTER
 import com.jesushzc.core.util.Constants.SCREEN_RUN_OVERVIEW
+import com.jesushzc.run.presentation.active_run.ActiveRunScreenRoot
 import com.jesushzc.run.presentation.run_overview.RunOverviewScreenRoot
 
 @Composable
@@ -94,7 +96,15 @@ private fun NavGraphBuilder.runGraph(navController: NavHostController) {
         route = GRAPH_RUN
     ) {
         composable(SCREEN_RUN_OVERVIEW) {
-            RunOverviewScreenRoot()
+            RunOverviewScreenRoot(
+                onStartRunClick = {
+                    navController.navigate(SCREEN_ACTIVE_RUN)
+                }
+            )
+        }
+
+        composable(SCREEN_ACTIVE_RUN) {
+            ActiveRunScreenRoot()
         }
     }
 }

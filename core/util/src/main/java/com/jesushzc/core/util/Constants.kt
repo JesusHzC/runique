@@ -7,6 +7,7 @@ object Constants {
     const val SCREEN_LOGIN = "login"
     const val SCREEN_REGISTER = "register"
     const val SCREEN_RUN_OVERVIEW = "run_overview"
+    const val SCREEN_ACTIVE_RUN = "active_run"
 
     // Graphs
     const val GRAPH_AUTH = "auth"
