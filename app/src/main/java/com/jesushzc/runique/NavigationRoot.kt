@@ -16,6 +16,7 @@ import com.jesushzc.core.util.Constants.SCREEN_INTRO
 import com.jesushzc.core.util.Constants.SCREEN_LOGIN
 import com.jesushzc.core.util.Constants.SCREEN_REGISTER
 import com.jesushzc.core.util.Constants.SCREEN_RUN_OVERVIEW
+import com.jesushzc.run.presentation.run_overview.RunOverviewScreenRoot
 
 @Composable
 fun NavigationRoot(
@@ -93,7 +94,7 @@ private fun NavGraphBuilder.runGraph(navController: NavHostController) {
         route = GRAPH_RUN
     ) {
         composable(SCREEN_RUN_OVERVIEW) {
-            Text("Run Overview")
+            RunOverviewScreenRoot()
         }
     }
 }
