@@ -41,11 +41,11 @@ fun RuniqueActionButton(
             disabledContentColor = RuniqueBlack
         ),
         shape = RoundedCornerShape(100f),
-        modifier = Modifier
+        modifier = modifier
             .height(IntrinsicSize.Min)
     ) {
         Box(
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxWidth()
                 .padding(8.dp),
             contentAlignment = Alignment.Center
@@ -86,11 +86,11 @@ fun RuniqueOutlinedActionButton(
             color = MaterialTheme.colorScheme.onBackground
         ),
         shape = RoundedCornerShape(100f),
-        modifier = Modifier
+        modifier = modifier
             .height(IntrinsicSize.Min)
     ) {
         Box(
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxWidth()
                 .padding(8.dp),
             contentAlignment = Alignment.Center
