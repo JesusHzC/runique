@@ -16,4 +16,6 @@ object Constants {
     // Endpoints
     const val ENDPOINT_REGISTER = "/register"
     const val ENDPOINT_LOGIN = "/login"
+    const val ENDPOINT_RUNS = "/runs"
+    const val ENDPOINT_RUN = "/run"
 }
