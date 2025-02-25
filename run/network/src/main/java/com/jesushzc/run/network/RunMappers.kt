@@ -13,7 +13,7 @@ fun RunDto.toRun(): Run {
         dateTimeUtc = Instant.parse(dateTimeUtc.toString())
             .atZone(ZoneId.of("UTC")),
         distanceMeters = distanceMeters,
-        location = Location(lat, lon),
+        location = Location(lat, long),
         maxSpeedKmh = maxSpeedKmh,
         totalElevationMeters = totalElevationMeters,
         mapPictureUrl = mapPictureUrl
