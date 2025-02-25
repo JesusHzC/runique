@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class RunDto(
     val id: String,
-    val dateTimeUtc: Long,
+    val dateTimeUtc: String,
     val durationMillis: Long,
     val distanceMeters: Int,
     val lat: Double,
