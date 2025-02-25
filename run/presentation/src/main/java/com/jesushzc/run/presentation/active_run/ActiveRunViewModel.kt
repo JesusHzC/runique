@@ -44,7 +44,6 @@ class ActiveRunViewModel(
     val eventChannel = _eventChannel.receiveAsFlow()
 
     private val _hasLocationPermission = MutableStateFlow(false)
-    val hasLocationPermission = _hasLocationPermission.asStateFlow()
 
     private val shouldTrack = snapshotFlow { state.shouldTrack }
         .stateIn(viewModelScope, SharingStarted.Lazily, state.shouldTrack)
