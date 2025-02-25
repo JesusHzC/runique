@@ -5,9 +5,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.jesushzc.core.domain.SessionStorage
 import com.jesushzc.core.domain.run.RunRepository
 import com.jesushzc.core.domain.run.SyncRunScheduler
 import com.jesushzc.run.presentation.run_overview.mappers.toRunUi
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -15,7 +17,9 @@ import kotlin.time.Duration.Companion.minutes
 
 class RunOverviewViewModel(
     private val runRepository: RunRepository,
-    private val syncRunScheduler: SyncRunScheduler
+    private val syncRunScheduler: SyncRunScheduler,
+    private val applicationScope: CoroutineScope,
+    private val sessionStorage: SessionStorage
 ): ViewModel() {
 
     var state by mutableStateOf(RunOverviewState())
@@ -47,7 +51,7 @@ class RunOverviewViewModel(
                 Unit
             }
             RunOverviewAction.OnLogoutClick -> {
-                Unit
+                logout()
             }
             is RunOverviewAction.DeleteRun -> {
                 viewModelScope.launch {
@@ -55,6 +59,15 @@ class RunOverviewViewModel(
                 }
             }
             else -> Unit
+        }
+    }
+
+    private fun logout() {
+        applicationScope.launch {
+            syncRunScheduler.cancelAllSyncs()
+            runRepository.deleteAllRuns()
+            runRepository.logout()
+            sessionStorage.set(null)
         }
     }
 

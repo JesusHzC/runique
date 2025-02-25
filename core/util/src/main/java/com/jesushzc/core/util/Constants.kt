@@ -18,4 +18,5 @@ object Constants {
     const val ENDPOINT_LOGIN = "/login"
     const val ENDPOINT_RUNS = "/runs"
     const val ENDPOINT_RUN = "/run"
+    const val ENDPOINT_LOGOUT = "/logout"
 }
