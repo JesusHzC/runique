@@ -25,8 +25,8 @@ With a modern and intuitive interface, you can monitor your runs in real-time an
 
 ## Installation
 
-Before building the project, you need to add the following values to `local.properties` (You can use random values to successfully build the project)
-- `BASE_URL`: String -> **Note:** The API used for this project is private.
+Before building the project, you need to add the following values to `local.properties`. **Note:** The API used for this project is private (You can use random values to successfully build the project).
+- `BASE_URL`
 - `API_KEY`
 - `MAPS_API_KEY`
 
