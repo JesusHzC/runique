@@ -21,7 +21,14 @@ With a modern and intuitive interface, you can monitor your runs in real-time an
 - Room
 - Foreground service
 - Work Manager
-- Dynamic resource for analytics
+- Dynamic resource
+
+## Installation
+
+Before building the project, you need to add the following values to `local.properties` (You can use random values to successfully build the project)
+- `BASE_URL`: String -> **Note:** The API used for this project is private.
+- `API_KEY`
+- `MAPS_API_KEY`
 
 ## Screenshots
 <p align="center">
