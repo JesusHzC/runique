@@ -2,6 +2,7 @@ package com.jesushzc.core.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import com.jesushzc.core.database.dao.AnalyticsDao
 import com.jesushzc.core.database.dao.RunDao
 import com.jesushzc.core.database.dao.RunPendingSyncDao
 import com.jesushzc.core.database.entity.DeletedRunSyncEntity
@@ -20,5 +21,6 @@ abstract class RunDatabase: RoomDatabase() {
 
     abstract val runDao: RunDao
     abstract val runPendingSyncDao: RunPendingSyncDao
+    abstract val analyticsDao: AnalyticsDao
 
 }

@@ -25,4 +25,8 @@ class MainViewModel(
         }
     }
 
+    fun setAnalyticsInstallDialogState(show: Boolean) {
+        state = state.copy(showAnalyticsInstallDialog = show)
+    }
+
 }
