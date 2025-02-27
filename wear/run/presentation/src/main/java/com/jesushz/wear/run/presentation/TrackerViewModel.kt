@@ -6,7 +6,9 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jesushz.wear.run.domain.ExerciseTracker
+import com.jesushz.wear.run.domain.PhoneConnector
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.launchIn
@@ -14,13 +16,26 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 class TrackerViewModel(
-    private val exerciseTracker: ExerciseTracker
+    private val exerciseTracker: ExerciseTracker,
+    private val phoneConnector: PhoneConnector
 ): ViewModel() {
 
     var state by mutableStateOf(TrackerState())
         private set
 
     private val hasBodySensorsPermission = MutableStateFlow(false)
+
+    init {
+        phoneConnector
+            .connectedDevice
+            .filterNotNull()
+            .onEach { connectedDevice ->
+                state = state.copy(
+                    isConnectedPhoneNearby = connectedDevice.isNearby
+                )
+            }
+            .launchIn(viewModelScope)
+    }
 
     fun onAction(action: TrackerAction) {
         when (action) {
