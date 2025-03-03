@@ -3,10 +3,19 @@
 Runique is an app designed for runners who want to keep an accurate record of their routes and running statistics. 
 With a modern and intuitive interface, you can monitor your runs in real-time and review your training history.
 
-## ✨ Features  
+Also you can sync with you watch and sync with runique mobile app.⌚️
+
+## ✨ Features app
 ✅ Real time tracking 
 ✅ Offline mode
 ✅ Detail analytics
+
+## ✨ Features wear app
+✅ Real time tracking 
+✅ Offline mode
+✅ Ambient mode
+✅ Sync with runique app
+✅ Track yout heart rate
 
 ## Technologies Used
 
@@ -36,4 +45,11 @@ Before building the project, you need to add the following values to `local.prop
   <img src="./screens/home.png" height="450">
   <img src="./screens/active_run.png" height="450">
   <img src="./screens/analytics.png" height="450">
+</p>
+
+<p align="center">
+  <img src="./screens/wear_not_connected.png" height="250">
+  <img src="./screens/wear_not_active.png" height="250">
+  <img src="./screens/wear_active.png" height="250">
+  <img src="./screens/wear_ambient_mode.png" height="250">
 </p>

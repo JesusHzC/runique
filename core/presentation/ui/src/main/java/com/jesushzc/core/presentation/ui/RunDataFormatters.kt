@@ -43,3 +43,7 @@ fun Double.toFormattedKmh(): String {
 fun Int.toFormattedMeters(): String {
     return "$this m"
 }
+
+fun Int?.toFormattedHeartRate(): String {
+    return if (this != null) "$this bpm" else "-"
+}

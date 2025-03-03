@@ -2,6 +2,7 @@ package com.jesushzc.run.presentation.run_overview.mappers
 
 import com.jesushzc.core.domain.run.Run
 import com.jesushzc.core.presentation.ui.formatted
+import com.jesushzc.core.presentation.ui.toFormattedHeartRate
 import com.jesushzc.core.presentation.ui.toFormattedKm
 import com.jesushzc.core.presentation.ui.toFormattedKmh
 import com.jesushzc.core.presentation.ui.toFormattedMeters
@@ -29,7 +30,9 @@ fun Run.toRunUi(): RunUi {
         maxSpeed = maxSpeedKmh.toFormattedKmh(),
         pace = duration.toFormattedPace(distanceKm),
         totalElevation = totalElevationMeters.toFormattedMeters(),
-        mapPictureUrl = mapPictureUrl
+        mapPictureUrl = mapPictureUrl,
+        avgHeartRate = avgHeartRate.toFormattedHeartRate(),
+        maxHeartRate = maxHeartRate.toFormattedHeartRate()
     )
 }
 
