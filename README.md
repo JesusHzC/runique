@@ -3,7 +3,7 @@
 Runique is an app designed for runners who want to keep an accurate record of their routes and running statistics. 
 With a modern and intuitive interface, you can monitor your runs in real-time and review your training history.
 
-Also you can sync with you watch and sync with runique mobile app.⌚️
+Also you can install app for wear os and sync with runique mobile app.⌚️
 
 ## ✨ Features app
 ✅ Real time tracking 
