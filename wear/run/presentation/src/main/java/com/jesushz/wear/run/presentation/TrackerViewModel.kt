@@ -1,3 +1,5 @@
+@file:OptIn(FlowPreview::class)
+
 package com.jesushz.wear.run.presentation
 
 import androidx.compose.runtime.getValue
@@ -12,6 +14,7 @@ import com.jesushz.wear.run.domain.ExerciseTracker
 import com.jesushz.wear.run.domain.PhoneConnector
 import com.jesushz.wear.run.domain.RunningTracker
 import com.jesushzc.core.domain.util.Result
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -22,9 +25,11 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.sample
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlin.time.Duration
+import kotlin.time.Duration.Companion.seconds
 
 class TrackerViewModel(
     private val exerciseTracker: ExerciseTracker,
@@ -106,10 +111,34 @@ class TrackerViewModel(
             )
         }
 
-        runningTracker
-            .heartRate
+        val isAmbientMode = snapshotFlow { state.isAmbientMode }
+        isAmbientMode
+            .flatMapLatest { isAmbientMode ->
+                if (isAmbientMode) {
+                    runningTracker
+                        .heartRate
+                        .sample(10.seconds)
+                } else {
+                    runningTracker.heartRate
+                }
+            }
             .onEach {
                 state = state.copy(heartRate = it)
+            }
+            .launchIn(viewModelScope)
+
+        isAmbientMode
+            .flatMapLatest { isAmbientMode ->
+                if (isAmbientMode) {
+                    runningTracker
+                        .elapsedTime
+                        .sample(10.seconds)
+                } else {
+                    runningTracker.elapsedTime
+                }
+            }
+            .onEach {
+                state = state.copy(elapsedDuration = it)
             }
             .launchIn(viewModelScope)
 
@@ -117,13 +146,6 @@ class TrackerViewModel(
             .distanceMeters
             .onEach {
                 state = state.copy(distanceMeters = it)
-            }
-            .launchIn(viewModelScope)
-
-        runningTracker
-            .elapsedTime
-            .onEach {
-                state = state.copy(elapsedDuration = it)
             }
             .launchIn(viewModelScope)
 
@@ -164,6 +186,17 @@ class TrackerViewModel(
                         )
                     }
                 }
+            }
+            is TrackerAction.OnEnterAmbientMode -> {
+                state = state.copy(
+                    isAmbientMode = true,
+                    burnInProtectionRequired = action.burnInProtectionRequired
+                )
+            }
+            TrackerAction.OnExitAmbientMode -> {
+                state = state.copy(
+                    isAmbientMode = false
+                )
             }
         }
     }

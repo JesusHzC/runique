@@ -40,6 +40,8 @@ import androidx.wear.compose.material3.Text
 import androidx.wear.compose.ui.tooling.preview.WearPreviewDevices
 import com.jesushz.core.notification.ActiveRunService
 import com.jesushz.core.presentation.designsystem_wear.RuniqueTheme
+import com.jesushz.wear.run.presentation.ambient.AmbientObserver
+import com.jesushz.wear.run.presentation.ambient.ambientMode
 import com.jesushz.wear.run.presentation.components.RunDataCard
 import com.jesushzc.core.presentation.designsystem.ExclamationMarkIcon
 import com.jesushzc.core.presentation.designsystem.FinishIcon
@@ -127,11 +129,21 @@ private fun TrackerScreen(
         permissionLauncher.launch(permissions.toTypedArray())
     }
 
+    AmbientObserver(
+        onEnterAmbient = { details ->
+            onAction(TrackerAction.OnEnterAmbientMode(details.burnInProtectionRequired))
+        },
+        onExitAmbient = {
+            onAction(TrackerAction.OnExitAmbientMode)
+        }
+    )
+
     if (state.isConnectedPhoneNearby) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(MaterialTheme.colorScheme.background),
+                .background(MaterialTheme.colorScheme.background)
+                .ambientMode(state.isAmbientMode, state.burnInProtectionRequired),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
