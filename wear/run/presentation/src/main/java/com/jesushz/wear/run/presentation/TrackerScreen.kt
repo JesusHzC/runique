@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -227,7 +228,8 @@ private fun ToggleRunButton(
 ) {
     OutlinedButton(
         onClick = onCLick,
-        modifier = modifier
+        modifier = modifier,
+        shape = CircleShape
     ) {
         if (isRunActive) {
             Icon(
