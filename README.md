@@ -11,11 +11,10 @@ Also you can sync with you watch and sync with runique mobile app.⌚️
 ✅ Detail analytics
 
 ## ✨ Features wear app
-✅ Real time tracking 
-✅ Offline mode
-✅ Ambient mode
 ✅ Sync with runique app
 ✅ Track yout heart rate
+✅ Offline mode
+✅ Ambient mode
 
 ## Technologies Used
 
