@@ -15,12 +15,11 @@ import com.jesushzc.core.presentation.ui.asUiText
 import com.jesushzc.run.domain.LocationDataCalculator
 import com.jesushzc.run.domain.RunningTracker
 import com.jesushzc.run.domain.WatchConnector
-import com.jesushzc.run.presentation.active_run.service.ActiveRunService
+import com.jesushz.core.notification.ActiveRunService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.launchIn
@@ -42,8 +41,8 @@ class ActiveRunViewModel(
 
     var state by mutableStateOf(
         ActiveRunState(
-            shouldTrack = ActiveRunService.isServiceActive and runningTracker.isTracking.value,
-            hasStartedRunning = ActiveRunService.isServiceActive,
+            shouldTrack = ActiveRunService.isServiceActive.value and runningTracker.isTracking.value,
+            hasStartedRunning = ActiveRunService.isServiceActive.value,
         )
     )
         private set
@@ -278,7 +277,7 @@ class ActiveRunViewModel(
 
     override fun onCleared() {
         super.onCleared()
-        if (!ActiveRunService.isServiceActive) {
+        if (!ActiveRunService.isServiceActive.value) {
             applicationScope.launch {
                 watchConnector.sendActionToWatch(MessagingAction.Untrackable)
             }

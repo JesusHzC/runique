@@ -29,6 +29,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.jesushzc.core.presentation.designsystem.RuniqueTheme
 import com.jesushzc.core.presentation.designsystem.StartIcon
 import com.jesushzc.core.presentation.designsystem.StopIcon
@@ -42,7 +43,7 @@ import com.jesushzc.core.presentation.ui.ObserveAsEvents
 import com.jesushzc.run.presentation.R
 import com.jesushzc.run.presentation.active_run.components.RunDataCard
 import com.jesushzc.run.presentation.active_run.maps.TrackerMap
-import com.jesushzc.run.presentation.active_run.service.ActiveRunService
+import com.jesushz.core.notification.ActiveRunService
 import com.jesushzc.run.presentation.util.hasLocationPermission
 import com.jesushzc.run.presentation.util.hasNotificationPermission
 import com.jesushzc.run.presentation.util.shouldShowLocationPermissionRationale
@@ -164,9 +165,10 @@ private fun ActiveRunScreen(
             onServiceToggle(false)
         }
     }
-    
-    LaunchedEffect(key1 = state.shouldTrack) {
-        if (context.hasLocationPermission() and state.shouldTrack and !ActiveRunService.isServiceActive) {
+
+    val isServiceActive by ActiveRunService.isServiceActive.collectAsStateWithLifecycle()
+    LaunchedEffect(key1 = state.shouldTrack, isServiceActive) {
+        if (context.hasLocationPermission() and state.shouldTrack and !isServiceActive) {
             onServiceToggle(true)
         }
     }

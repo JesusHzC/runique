@@ -1,6 +1,5 @@
 package com.jesushzc.runique
 
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavGraphBuilder
@@ -20,7 +19,7 @@ import com.jesushzc.core.util.Constants.SCREEN_LOGIN
 import com.jesushzc.core.util.Constants.SCREEN_REGISTER
 import com.jesushzc.core.util.Constants.SCREEN_RUN_OVERVIEW
 import com.jesushzc.run.presentation.active_run.ActiveRunScreenRoot
-import com.jesushzc.run.presentation.active_run.service.ActiveRunService
+import com.jesushz.core.notification.ActiveRunService
 import com.jesushzc.run.presentation.run_overview.RunOverviewScreenRoot
 
 @Composable
